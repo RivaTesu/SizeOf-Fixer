@@ -1,5 +1,5 @@
-# SizeOf Fixer
+# Simple SizeOf Fixer
 
-Replaces SizeOf
-
-Solves Mathematical Equations
+Features:
+	- Replaces SizeOf
+	- Solves Mathematical Equations
