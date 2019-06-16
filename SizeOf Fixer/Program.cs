@@ -54,10 +54,21 @@ namespace SizeOf_Fixer
                 }
                 string filename = string.Format("{0}{1}-SizeOfsFixed{2}", directoryName, Path.GetFileNameWithoutExtension(args[0]), Path.GetExtension(args[0]));
 
-                ModuleWriterOptions moduleWriterOptions = new ModuleWriterOptions(AsmethodMdOriginal) { Logger = DummyLogger.NoThrowInstance };
-                ModuleWriterOptions options = moduleWriterOptions;
-
-                AsmethodMdOriginal.Write(filename, options);
+                if (!AsmethodMdOriginal.Is32BitRequired)
+                {
+                    ModuleWriterOptions moduleWriterOptions = new ModuleWriterOptions(AsmethodMdOriginal);
+                    moduleWriterOptions.MetaDataLogger = DummyLogger.NoThrowInstance;
+                    moduleWriterOptions.MetaDataOptions.Flags = MetaDataFlags.PreserveAll;
+                    AsmethodMdOriginal.Write(filename, moduleWriterOptions);
+                }
+                else
+                {
+                    NativeModuleWriterOptions moduleWriterOptions = new NativeModuleWriterOptions(AsmethodMdOriginal);
+                    moduleWriterOptions.MetaDataLogger = DummyLogger.NoThrowInstance;
+                    moduleWriterOptions.MetaDataOptions.Flags = MetaDataFlags.PreserveAll;
+                    AsmethodMdOriginal.NativeWrite(filename, moduleWriterOptions);
+                }
+               
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("");
