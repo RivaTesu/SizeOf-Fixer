@@ -14,6 +14,8 @@ namespace SizeOf_Fixer
 
         private static void Main(string[] args)
         {
+            Console.Title = "SizeOf Fixer - iYaReM";
+            
             if (args.Length == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -21,7 +23,6 @@ namespace SizeOf_Fixer
                 Console.ReadKey();
                 return;
             }
-            Console.Title = "SizeOf Fixer - iYaReM";
 
             try
             {
